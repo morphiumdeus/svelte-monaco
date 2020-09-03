@@ -62,13 +62,13 @@
 
 <style>
   #editorWithButton {
-    height: 40vh;
+    height: 100vh;
     width: 40vw;
     min-width: 600px;
     position: fixed;
     z-index: 999;
     bottom: 0;
-    left: 0;
+    left: 20vw;
   }
   #monaco-container {
     height: 100%;
