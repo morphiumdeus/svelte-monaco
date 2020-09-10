@@ -4,31 +4,28 @@ import { WebrtcProvider } from 'y-webrtc'
 import { WebsocketProvider } from 'y-websocket'
 import { IndexeddbPersistence } from 'y-indexeddb'
 
+import editorText from './store'
+
+export let roomName
+export let fileName = "editorText"
+
 const ydoc = new Y.Doc()
 
 // this allows you to instantly get the (cached) documents data
-const indexeddbProvider = new IndexeddbPersistence('count-demo', ydoc)
+const indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
 indexeddbProvider.whenSynced.then(() => {
   console.log('loaded data from indexed db')
 })
 
 // Sync clients with the y-webrtc provider.
-const webrtcProvider = new WebrtcProvider('count-demo', ydoc)
+const webrtcProvider = new WebrtcProvider(roomName, ydoc)
 
 // Sync clients with the y-websocket provider
 const websocketProvider = new WebsocketProvider(
-  'wss://demos.yjs.dev', 'count-demo', ydoc
+  'wss://demos.yjs.dev', roomName, ydoc
 )
 
-// array of numbers which produce a sum
-const yarray = ydoc.getArray('count')
+// assign text to store
+$editorText = ydoc.getText(fileName)
 
-// observe changes of the sum
-yarray.observe(event => {
-  // print updates when the data changes
-  console.log('new sum: ' + yarray.toArray().reduce((a,b) => a + b))
-})
-
-// add 1 to the sum
-yarray.push([1]) // => "new sum: 1"
 </script>
