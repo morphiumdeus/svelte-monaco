@@ -5,6 +5,7 @@
 
 <style>
 	#editor {
+		position: absolute;
 		top: 0;
 		height: 100vh;
 		left: 20vw;
