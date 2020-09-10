@@ -25,8 +25,8 @@ console.log(roomName)
 $websocketProvider = new WebsocketProvider(
   'wss://demos.yjs.dev', roomName, ydoc
 )
-websocketProvider.whenSynced.then(() => {
-  console.log('websocketProvider synced: ' + editorText) 
+websocketProvider.on('status', event => {
+  console.log(event.status) // logs "connected" or "disconnected"
 })
 
 // assign text to store
