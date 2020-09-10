@@ -1,10 +1,10 @@
 <script>
 import * as Y from 'yjs'
-import { WebrtcProvider } from 'y-webrtc'
+// import { WebrtcProvider } from 'y-webrtc'
 import { WebsocketProvider } from 'y-websocket'
 import { IndexeddbPersistence } from 'y-indexeddb'
 
-import { editorText } from './store'
+import { editorText, websocketProvider } from './store'
 
 export let roomName
 export let fileName = "editorText"
@@ -18,10 +18,10 @@ indexeddbProvider.whenSynced.then(() => {
 })
 
 // Sync clients with the y-webrtc provider.
-const webrtcProvider = new WebrtcProvider(roomName, ydoc)
+// const webrtcProvider = new WebrtcProvider(roomName, ydoc)
 
 // Sync clients with the y-websocket provider
-const websocketProvider = new WebsocketProvider(
+$websocketProvider = new WebsocketProvider(
   'wss://demos.yjs.dev', roomName, ydoc
 )
 

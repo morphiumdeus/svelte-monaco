@@ -3,7 +3,7 @@
   import { onMount } from 'svelte'
   import { MonacoBinding } from 'y-monaco'
 
-  import { editorText } from './store'
+  import { editorText, websocketProvider } from './store'
 
   onMount(() => {
       const editor = monaco.editor.create(document.getElementById('monaco-container'), {
@@ -12,7 +12,7 @@
     })
 
     // Bind Yjs to the editor model
-    const monacoBinding = new MonacoBinding($editorText, editor.getModel(), new Set([editor]), provider.awareness)
+    const monacoBinding = new MonacoBinding($editorText, editor.getModel(), new Set([editor]), websocketProvider.awareness)
   })
 </script>
 
