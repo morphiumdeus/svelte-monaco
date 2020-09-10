@@ -1,15 +1,18 @@
 <script>
   import * as monaco from 'monaco-editor'
+  import { onMount } from 'svelte';
+
   import { editorText } from './store'
 
-  const editor = monaco.editor.create(document.getElementById('monaco-container'), {
-    value: '', // MonacoBinding overwrites this value with the content of type
-    language: "yaml"
+  onMount(() => {
+      const editor = monaco.editor.create(document.getElementById('monaco-container'), {
+      value: '', // MonacoBinding overwrites this value with the content of type
+      language: "yaml"
+    })
+
+    // Bind Yjs to the editor model
+    const monacoBinding = new MonacoBinding($editorText, editor.getModel(), new Set([editor]), provider.awareness)
   })
-
-  // Bind Yjs to the editor model
-  const monacoBinding = new MonacoBinding($editorText, editor.getModel(), new Set([editor]), provider.awareness)
-
 </script>
 
 <style>

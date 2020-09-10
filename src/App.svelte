@@ -3,5 +3,5 @@
 	import Yjs from './yjs.svelte'
 </script>
 
-<Yjs />
+<Yjs roomName="svelte-test-monaco" />
 <Editor />
