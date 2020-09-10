@@ -30,7 +30,7 @@ websocketProvider.on('status', event => {
 })
 
 // assign text to store
-$editorText = ydoc.getText(fileName)
+editorText = ydoc.getText(fileName)
 
 editorText.observe(event => {
   // print updates when the data changes

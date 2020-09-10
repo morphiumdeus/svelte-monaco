@@ -13,7 +13,6 @@
 	}
 </style>
 
-<Yjs roomName="svelte-test-monaco" />
 <div id="editor">
-	<Editor />
+	<Editor roomName="svelte-test-monaco" />
 </div>
