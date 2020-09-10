@@ -11,6 +11,7 @@ export let fileName = "editorText"
 
 const ydoc = new Y.Doc()
 
+console.log(roomName)
 // this allows you to instantly get the (cached) documents data
 const indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
 indexeddbProvider.whenSynced.then(() => {
