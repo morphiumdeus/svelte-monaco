@@ -4,7 +4,7 @@ import { WebrtcProvider } from 'y-webrtc'
 import { WebsocketProvider } from 'y-websocket'
 import { IndexeddbPersistence } from 'y-indexeddb'
 
-comsole.log("tada")
+console.log("tada")
 const ydoc = new Y.Doc()
 
 // this allows you to instantly get the (cached) documents data
