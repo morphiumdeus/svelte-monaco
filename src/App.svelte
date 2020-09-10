@@ -3,5 +3,16 @@
 	import Yjs from './yjs.svelte'
 </script>
 
+<style>
+	#editor {
+		top: 0;
+		height: 100vh;
+		left: 20vw;
+		width: 30vw;
+	}
+</style>
+
 <Yjs roomName="svelte-test-monaco" />
-<Editor />
+<div id="editor">
+	<Editor />
+</div>
