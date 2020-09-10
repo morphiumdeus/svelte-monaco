@@ -3,7 +3,6 @@
   import { onMount } from 'svelte'
   import { MonacoBinding } from 'y-monaco'
 
-  import { editorText, websocketProvider } from './store'
   import * as Y from 'yjs'
   // import { WebrtcProvider } from 'y-webrtc'
   import { WebsocketProvider } from 'y-websocket'
@@ -25,7 +24,7 @@
   // const webrtcProvider = new WebrtcProvider(roomName, ydoc)
 
   // Sync clients with the y-websocket provider
-  websocketProvider = new WebsocketProvider(
+  const websocketProvider = new WebsocketProvider(
     'wss://demos.yjs.dev', roomName, ydoc
   )
   websocketProvider.on('status', event => {
@@ -33,7 +32,7 @@
   })
 
   // assign text to store
-  editorText = ydoc.getText(fileName)
+  const editorText = ydoc.getText(fileName)
 
   editorText.observe(event => {
     // print updates when the data changes
