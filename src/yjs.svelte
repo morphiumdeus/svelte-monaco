@@ -25,8 +25,16 @@ console.log(roomName)
 $websocketProvider = new WebsocketProvider(
   'wss://demos.yjs.dev', roomName, ydoc
 )
+websocketProvider.whenSynced.then(() => {
+  console.log('websocketProvider synced: ' + editorText) 
+})
 
 // assign text to store
 $editorText = ydoc.getText(fileName)
+
+editorText.observe(event => {
+  // print updates when the data changes
+  console.log('text changed: ' + editorText)
+})
 
 </script>
