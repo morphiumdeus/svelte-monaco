@@ -2,7 +2,7 @@
   import * as monaco from 'monaco-editor'
   import { editorText } from './store'
 
-  const editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+  const editor = monaco.editor.create(document.getElementById('monaco-container'), {
     value: '', // MonacoBinding overwrites this value with the content of type
     language: "yaml"
   })
