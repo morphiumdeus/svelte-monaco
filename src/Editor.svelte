@@ -1,6 +1,7 @@
 <script>
   import * as monaco from 'monaco-editor'
-  import { onMount } from 'svelte';
+  import { onMount } from 'svelte'
+  import { MonacoBinding } from 'y-monaco'
 
   import { editorText } from './store'
 
