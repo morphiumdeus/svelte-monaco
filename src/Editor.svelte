@@ -1,6 +1,6 @@
 <script>
   import * as monaco from 'monaco-editor'
-  import editorText from './store'
+  import { editorText } from './store'
 
   const editor = monaco.editor.create(document.getElementById('monaco-editor'), {
     value: '', // MonacoBinding overwrites this value with the content of type

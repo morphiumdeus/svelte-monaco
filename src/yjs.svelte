@@ -4,7 +4,7 @@ import { WebrtcProvider } from 'y-webrtc'
 import { WebsocketProvider } from 'y-websocket'
 import { IndexeddbPersistence } from 'y-indexeddb'
 
-import editorText from './store'
+import { editorText } from './store'
 
 export let roomName
 export let fileName = "editorText"
