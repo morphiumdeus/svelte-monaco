@@ -13,10 +13,10 @@ const ydoc = new Y.Doc()
 
 console.log(roomName)
 // this allows you to instantly get the (cached) documents data
-const indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
-indexeddbProvider.whenSynced.then(() => {
-  console.log('loaded data from indexed db')
-})
+//const indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
+//indexeddbProvider.whenSynced.then(() => {
+//  console.log('loaded data from indexed db')
+//})
 
 // Sync clients with the y-webrtc provider.
 // const webrtcProvider = new WebrtcProvider(roomName, ydoc)
