@@ -2,7 +2,7 @@
   import { 
     // onMount, 
     onDestroy } from 'svelte'
-  import { userCSS, showEditor } from './store'
+  import { userScript, showEditor } from './store'
   // import { editor as MonacoEditor } from 'monaco-editor';
   let editor, modelChangeSub
   // onMount(mountEditor)
@@ -10,7 +10,7 @@
     setTimeout(() => {
       import("monaco-editor").then(monaco => {
         editor = monaco.editor.create(document.getElementById('monaco-container'), {
-          value: $userCSS.split(`
+          value: $userScript.split(`
 `).join('\n'),
           language: 'css',
           roundedSelection: false,
@@ -24,12 +24,12 @@
           }
         });
         modelChangeSub = editor.getModel().onDidChangeContent(v => {
-          userCSS.set(editor.getModel().getValue())
+          userScript.set(editor.getModel().getValue())
         })
       })
     }, 200)
   }
-  userCSS.subscribe(v => {
+  userScript.subscribe(v => {
     if (!editor || !editor.getModel()) return
     const curVal = editor.getModel().getValue()
     if (curVal !== v) {

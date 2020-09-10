@@ -15,8 +15,8 @@ let pathFromUrl = new URLSearchParams(document.location.search).get('path');
 
 let _userScript = localStorage.getItem('userScript');
 _userScript = _userScript ? JSON.parse(_userScript) : defaultUserScript();
-let initCSS = pathFromUrl || _userScript;
-export const userScript = writable(initCSS);
+let initUserScript = pathFromUrl || _userScript;
+export const userScript = writable(initUserScript);
 
 // special hacks to respond
 userScript.subscribe((value) => {
