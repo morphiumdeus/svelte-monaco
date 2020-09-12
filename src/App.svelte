@@ -1,10 +1,11 @@
 <script>
 	import Editor from './Editor.svelte'
+	import Menu from './Menu.svelte'
+	import { roomName } from './store'
 	const greg = require("greg")
 
-	const sentence = greg.sentence();
-
-	console.log("The sentence \"%s\" corresponds to the id %d", sentence, greg.parse(sentence));
+	$roomName = greg.sentence()
+	console.log("The sentence \"%s\" corresponds to the id %d", $roomName, greg.parse($roomName))
 </script>
 
 <style>
@@ -18,5 +19,6 @@
 </style>
 
 <div id="editor">
-	<Editor roomName="svelte-test-monaco" />
+	<Menu room=$roomName />
+	<Editor bind:$roomName />
 </div>
