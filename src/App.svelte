@@ -2,7 +2,7 @@
 	import Editor from './Editor.svelte'
 	const greg = require("greg")
 
-	sentence = greg.sentence();
+	const sentence = greg.sentence();
 
 	console.log("The sentence \"%s\" corresponds to the id %d", sentence, greg.parse(sentence));
 </script>
