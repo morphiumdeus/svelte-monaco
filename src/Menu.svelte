@@ -1,7 +1,7 @@
 <script>
-    import { Input } from 'svelma'
+    import { Textfield } from '@smui/textfield'
 
     import { roomName } from './store'
 </script>
 
-<Input type="text" bind:value={$roomName} />
+<Textfield bind:value={$roomName} label="$roomName" input$aria-controls="helper-text-standard-a" input$aria-describedby="helper-text-standard-a" />
