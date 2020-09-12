@@ -9,11 +9,11 @@
   import { IndexeddbPersistence } from 'y-indexeddb'
 
   export let roomName
-  export let fileName = "editorText"
+  export let fileName = "main"
 
   const ydoc = new Y.Doc()
 
-  console.log(roomName)
+  console.log(fileName)
   // this allows you to instantly get the (cached) documents data
   //const indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
   //indexeddbProvider.whenSynced.then(() => {
@@ -34,10 +34,6 @@
   // assign text to store
   const editorText = ydoc.getText(fileName)
 
-  editorText.observe(event => {
-    // print updates when the data changes
-    console.log('text changed: ' + editorText)
-  })
   onMount(() => {
       const editor = monaco.editor.create(document.getElementById('monaco-container'), {
       value: '', // MonacoBinding overwrites this value with the content of type

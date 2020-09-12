@@ -1,6 +1,10 @@
 <script>
-	import Editor from './Editor.svelte';
-	import Yjs from './yjs.svelte'
+	import Editor from './Editor.svelte'
+	const greg = require("greg")
+
+	sentence = greg.sentence();
+
+	console.log("The sentence \"%s\" corresponds to the id %d", sentence, greg.parse(sentence));
 </script>
 
 <style>
