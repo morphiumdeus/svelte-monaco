@@ -10,7 +10,7 @@
   
   import {roomName} from './store'
   
-  let websocketProvider, monacoBinding, editor
+  let websocketProvider, monacoBinding, editor, data
   const ydoc = new Y.Doc()
   
   onMount(() => {
@@ -43,9 +43,10 @@
     console.log("loading new room:", roomName)
     if(websocketProvider != undefined){
       websocketProvider.disconnect()
+      monacoBinding.destroy()
     }
     websocketProvider = new WebsocketProvider(
-      'wss://demos.yjs.dev', roomName, ydoc
+      `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
     )
     websocketProvider.on('status', event => {
       console.log(event.status) // logs "connected" or "disconnected"
@@ -63,9 +64,13 @@
       ymap.set("files", fileMap)
     }
     console.log(ymap, ymap.entries());
+    for(let [fileName, file] of ymap.get("files")){
+      data[fileName].model = editor.createModel(file.get("content", 'yaml'))
+    }
+    editor.setModel(data["main"].model)
 
     // Bind Yjs to the editor model
-    monacoBinding = new MonacoBinding(ymap.get("files").get("main").get("content"), editor.getModel(), new Set([editor]), websocketProvider.awareness)
+    monacoBinding = new MonacoBinding(ymap.get("files").get("main").get("content"), data["main"].model, new Set([editor]), websocketProvider.awareness)
   }
 </script>
 
