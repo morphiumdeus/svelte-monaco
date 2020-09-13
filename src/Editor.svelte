@@ -44,6 +44,8 @@
     console.log("loading new room:", roomName)
     if(websocketProvider != undefined){
       websocketProvider.disconnect()
+    }
+    if(monacoBinding != undefined){
       monacoBinding.destroy()
     }
     websocketProvider = new WebsocketProvider(
