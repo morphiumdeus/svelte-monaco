@@ -34,6 +34,7 @@
     loadRoom($roomName)
     
     const unsubscribe = roomName.subscribe(room => {
+      console.log("room name changed: "+ room);
       loadRoom(room)
     });
   })

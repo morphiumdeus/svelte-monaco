@@ -19,6 +19,6 @@
 </style>
 
 <div id="editor">
-	<Menu room=$roomName />
-	<Editor bind:$roomName />
+	<Menu />
+	<Editor />
 </div>

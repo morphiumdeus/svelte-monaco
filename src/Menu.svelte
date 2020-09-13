@@ -1,6 +1,16 @@
 <script>
-    import { roomName } from './store'
-    import Input from './Input.svelte'
+    import { roomName } from './store'    
 </script>
 
-<Input type="text" bind:value={$roomName} />
+<style>
+    #file-menu {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100 vh;
+    }
+</style>
+
+<div id="file-menu">
+    <input bind:value={$roomName} />
+</div>
