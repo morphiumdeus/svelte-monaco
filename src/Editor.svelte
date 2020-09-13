@@ -53,9 +53,10 @@
     // assign text to store
     let ymap = ydoc.getMap('fileMap')
     console.log(ymap, ymap.entries());
-    if (ymap.entries() === undefined) {
+    if (ymap.length == 0) {
       ymap.set("files", new ymap({"main": {name: "main", content: "---"}}))
     }
+    console.log(ymap, ymap.entries());
 
     // Bind Yjs to the editor model
     monacoBinding = new MonacoBinding(ymap.get("files").get("main").content, editor.getModel(), new Set([editor]), websocketProvider.awareness)
