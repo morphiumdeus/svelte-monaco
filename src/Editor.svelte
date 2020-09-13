@@ -51,29 +51,31 @@
     )
     websocketProvider.on('status', event => {
       console.log(event.status) // logs "connected" or "disconnected"
+      if(event.status == "connected"){
+            
+        // assign text to store
+        let ymap = ydoc.getMap('fileMap')
+        if (undefined === ymap.get("files")) {
+          const fileMap = new Y.Map()
+          const mainFile = new Y.Map()
+          const mainContent = new Y.Text("---")
+          mainFile.set("content", mainContent)
+          fileMap.set("main", mainFile)
+          ymap.set("files", fileMap)
+        }
+        console.log(ymap, ymap.entries());
+        for(let [fileName, file] of ymap.get("files")){
+          console.log(fileName, file.get("content").toString());
+          data[fileName] = {}
+          data[fileName].model = monaco.editor.createModel(file.get("content").toString(), 'yaml')
+        }
+        editor.setModel(data["main"].model)
+
+        // Bind Yjs to the editor model
+        monacoBinding = new MonacoBinding(ymap.get("files").get("main").get("content"), data["main"].model, new Set([editor]), websocketProvider.awareness)
+
+      }
     })
-
-    // assign text to store
-    let ymap = ydoc.getMap('fileMap')
-    console.log(ymap, ymap.entries());
-    if (undefined === ymap.get("files")) {
-      const fileMap = new Y.Map()
-      const mainFile = new Y.Map()
-      const mainContent = new Y.Text("---")
-      mainFile.set("content", mainContent)
-      fileMap.set("main", mainFile)
-      ymap.set("files", fileMap)
-    }
-    console.log(ymap, ymap.entries());
-    for(let [fileName, file] of ymap.get("files")){
-      console.log(fileName, file.get("content"));
-      data[fileName] = {}
-      data[fileName].model = monaco.editor.createModel(file.get("content").toString(), 'yaml')
-    }
-    editor.setModel(data["main"].model)
-
-    // Bind Yjs to the editor model
-    monacoBinding = new MonacoBinding(ymap.get("files").get("main").get("content"), data["main"].model, new Set([editor]), websocketProvider.awareness)
   }
 </script>
 
