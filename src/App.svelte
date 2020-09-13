@@ -8,17 +8,7 @@
 	console.log("The sentence \"%s\" corresponds to the id %d", $roomName, greg.parse($roomName))
 </script>
 
-<style>
-	#editor {
-		position: absolute;
-		top: 0;
-		height: 100vh;
-		left: 20vw;
-		width: 30vw;
-	}
-</style>
 
-<div id="editor">
-	<Menu />
-	<Editor />
-</div>
+
+<Menu />
+<Editor />

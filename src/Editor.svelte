@@ -70,10 +70,13 @@
 </script>
 
 <style>
-  #monaco-container {
-    height: 100%;
-    width: 100%;
-  }
+	#monaco-container {
+		position: absolute;
+		top: 0;
+		height: 100vh;
+		left: 20vw;
+		width: 30vw;
+	}
 </style>
 
 <div id="monaco-container"></div>
