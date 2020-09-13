@@ -40,7 +40,9 @@
 
   function loadRoom(roomName){
     console.log("loading new room:", roomName)
-    websocketProvider.disconnect()
+    if(websocketProvider != undefined){
+      websocketProvider.disconnect()
+    }
     websocketProvider = new WebsocketProvider(
       'wss://demos.yjs.dev', roomName, ydoc
     )
