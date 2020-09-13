@@ -54,7 +54,8 @@
     let ymap = ydoc.getMap('fileMap')
     console.log(ymap, ymap.entries());
     if (ymap.length == 0) {
-      ymap.set("files", new ymap({"main": {name: "main", content: "---"}}))
+      const fileMap = new Y.Map({"main": {name: "main", content: "---"}})
+      ymap.set("files", fileMap)
     }
     console.log(ymap, ymap.entries());
 
