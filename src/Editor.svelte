@@ -67,6 +67,7 @@
     console.log(ymap, ymap.entries());
     for(let [fileName, file] of ymap.get("files")){
       console.log(fileName, file.get("content"));
+      data[fileName] = {}
       data[fileName].model = monaco.editor.createModel(file.get("content").toString(), 'yaml')
     }
     editor.setModel(data["main"].model)
