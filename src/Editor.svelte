@@ -11,6 +11,7 @@
   import {roomName} from './store'
   
   let websocketProvider, monacoBinding
+  const ydoc = new Y.Doc()
   
   onMount(() => {
       const editor = monaco.editor.create(document.getElementById('monaco-container'), {
@@ -18,7 +19,6 @@
       language: "yaml"
     })
 
-    const ydoc = new Y.Doc()
 
     // this allows you to instantly get the (cached) documents data
     //const indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
