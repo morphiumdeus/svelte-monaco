@@ -10,7 +10,8 @@
   
   import {roomName} from './store'
   
-  let websocketProvider, monacoBinding, editor, data
+  let websocketProvider, monacoBinding, editor
+  let data = {}
   const ydoc = new Y.Doc()
   
   onMount(() => {
