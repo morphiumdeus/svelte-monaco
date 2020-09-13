@@ -56,13 +56,16 @@
     console.log(ymap, ymap.entries());
     if (undefined === ymap.get("files")) {
       const fileMap = new Y.Map()
-      fileMap.set("main", {name: "main", content: new Y.Text("---")})
+      const mainFile = new Y.Map()
+      const mainContent = new Y.Text("---")
+      mainFile.set("content", mainContent)
+      fileMap.set("main", mainFile)
       ymap.set("files", fileMap)
     }
     console.log(ymap, ymap.entries());
 
     // Bind Yjs to the editor model
-    monacoBinding = new MonacoBinding(ymap.get("files").get("main").content, editor.getModel(), new Set([editor]), websocketProvider.awareness)
+    monacoBinding = new MonacoBinding(ymap.get("files").get("main").get("content"), editor.getModel(), new Set([editor]), websocketProvider.awareness)
   }
 </script>
 
