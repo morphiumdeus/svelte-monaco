@@ -53,7 +53,7 @@
     // assign text to store
     let ymap = ydoc.getMap('fileMap')
     console.log(ymap, ymap.entries());
-    if (ymap.length == 0) {
+    if (undefined === ymap.get("files")) {
       const fileMap = new Y.Map({"main": {name: "main", content: "---"}})
       ymap.set("files", fileMap)
     }
