@@ -31,14 +31,14 @@
 
     // Sync clients with the y-websocket provider
     console.log($roomName)
-    loadRoom($roomName)
+    loadRoom($roomName, editor)
   })
 
   const unsubscribe = roomName.subscribe(room => {
     loadRoom(room)
   });
 
-  function loadRoom(roomName){
+  function loadRoom(roomName, editor){
     console.log("loading new room:", roomName)
     if(websocketProvider != undefined){
       websocketProvider.disconnect()
