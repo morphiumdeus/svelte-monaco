@@ -10,11 +10,11 @@
   
   import {roomName} from './store'
   
-  let websocketProvider, monacoBinding
+  let websocketProvider, monacoBinding, editor
   const ydoc = new Y.Doc()
   
   onMount(() => {
-      const editor = monaco.editor.create(document.getElementById('monaco-container'), {
+    editor = monaco.editor.create(document.getElementById('monaco-container'), {
       value: '', // MonacoBinding overwrites this value with the content of type
       language: "yaml"
     })
@@ -31,14 +31,14 @@
 
     // Sync clients with the y-websocket provider
     console.log($roomName)
-    loadRoom($roomName, editor)
+    loadRoom($roomName)
   })
 
   const unsubscribe = roomName.subscribe(room => {
     loadRoom(room)
   });
 
-  function loadRoom(roomName, editor){
+  function loadRoom(roomName){
     console.log("loading new room:", roomName)
     if(websocketProvider != undefined){
       websocketProvider.disconnect()
