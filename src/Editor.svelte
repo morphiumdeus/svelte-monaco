@@ -10,7 +10,7 @@
   
   import {roomName} from './store'
   
-  let websocketProvider, monacoBinding, editor
+  let indexeddbProvider, websocketProvider, monacoBinding, editor
   let data = {}
   let ydoc = new Y.Doc()
   
@@ -21,11 +21,6 @@
     })
 
 
-    // this allows you to instantly get the (cached) documents data
-    //const indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
-    //indexeddbProvider.whenSynced.then(() => {
-    //  console.log('loaded data from indexed db')
-    //})
 
     // Sync clients with the y-webrtc provider.
     // const webrtcProvider = new WebrtcProvider(roomName, ydoc)
@@ -49,6 +44,12 @@
       monacoBinding.destroy()
     }
     ydoc = new Y.Doc()
+    
+    // this allows you to instantly get the (cached) documents data
+    indexeddbProvider = new IndexeddbPersistence(roomName, ydoc)
+    indexeddbProvider.whenSynced.then(() => {
+      console.log('loaded data from indexed db')
+    })
     websocketProvider = new WebsocketProvider(
       `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
     )
@@ -59,6 +60,7 @@
         // assign text to store
         let ymap = ydoc.getMap('fileMap')
         if (undefined === ymap.get("files")) {
+          console.log("created new room, create empty file");
           const fileMap = new Y.Map()
           const mainFile = new Y.Map()
           const mainContent = new Y.Text("---")
@@ -66,7 +68,7 @@
           fileMap.set("main", mainFile)
           ymap.set("files", fileMap)
         }
-        console.log(ymap, ymap.entries());
+        console.log(ymap, ymap.get("files").get("main").get("content"));
         for(let [fileName, file] of ymap.get("files")){
           console.log(fileName, file.get("content").toString());
           data[fileName] = {}
