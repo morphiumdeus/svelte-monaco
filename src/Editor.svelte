@@ -34,10 +34,10 @@
     console.log($roomName)
     loadRoom($roomName)
     
-    /*const unsubscribe = roomName.subscribe(room => {
+    const unsubscribe = roomName.subscribe(room => {
       console.log("room name changed: "+ room);
       loadRoom(room)
-    });*/
+    });
   })
 
   function loadRoom(roomName){
