@@ -12,7 +12,7 @@
   
   let websocketProvider, monacoBinding, editor
   let data = {}
-  const ydoc = new Y.Doc()
+  let ydoc = new Y.Doc()
   
   onMount(() => {
     editor = monaco.editor.create(document.getElementById('monaco-container'), {
@@ -34,10 +34,10 @@
     console.log($roomName)
     loadRoom($roomName)
     
-    const unsubscribe = roomName.subscribe(room => {
+    /*const unsubscribe = roomName.subscribe(room => {
       console.log("room name changed: "+ room);
       loadRoom(room)
-    });
+    });*/
   })
 
   function loadRoom(roomName){
@@ -48,6 +48,7 @@
     if(monacoBinding != undefined){
       monacoBinding.destroy()
     }
+    ydoc = new Y.Doc()
     websocketProvider = new WebsocketProvider(
       `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
     )
