@@ -55,7 +55,8 @@
   function createEmptyProject(ymap){
     const fileMap = new Y.Map()
     fileMap.set("main", createEmptyFile())
-    ymap.set("files", fileMap)
+    ymap.set('files', fileMap)
+    ymap.set('isCreated', true)
   }
   function createEmptyFile(){
     const file = new Y.Map()

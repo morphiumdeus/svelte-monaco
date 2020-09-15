@@ -4,7 +4,7 @@
     const unsubscribe = ydoc.subscribe(value => {
         console.log(value)
         try {
-            files = value.getMap('fileMap').getMap('files')
+            files = value.getMap('fileMap')
             console.log(files);
         } catch (e) {
             if (e instanceof TypeError) {
@@ -23,7 +23,9 @@
 </style>
 
 <ul>
-	{#each files.keys() as file}
-		<li class:selected={file == activeFile}>{file}</li>
-	{/each}
+    {#if files.get('isCreated')}
+        {#each files.getMap('files').keys() as file}
+            <li class:selected={file == activeFile}>{file}</li>
+        {/each}
+    {/if}
 </ul>
