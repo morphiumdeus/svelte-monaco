@@ -4,8 +4,8 @@
     let files = { has: () => false}
     const unsubscribe = ydoc.subscribe(value => {
         console.log(value)
-        if(ydoc.getMap('fileMap') && ydoc.getMap('fileMap').has('files'))
-        files = ydoc.getMap('fileMap')
+        if(value.getMap('fileMap') && value.getMap('fileMap').has('files'))
+        files = value.getMap('fileMap')
     })
 </script>
 
