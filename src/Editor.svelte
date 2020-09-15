@@ -9,11 +9,12 @@
   
   let monacoBinding, editor
   let data = {}
-
+  let files = { has: () => false}
   const unsubscribe = ydoc.subscribe(value => {
     console.log(value)
     if(ydoc.has('fileMap') && ydoc.getMap('fileMap').has('files'))
     files = ydoc.getMap('fileMap')
+    loadRoom(roomName)
   })
   
   onMount(() => {
@@ -23,8 +24,10 @@
     })
 
     const unsubscribe = roomName.subscribe(room => {
-      console.log("room name changed: "+ room);
-      loadRoom(room)
+      console.log("room name changed: "+ room)
+      if(files.has('files')){
+        loadRoom(room)
+      }
     })
   })
 
