@@ -10,7 +10,7 @@
   let files = { has: () => false}
   const unsubscribe = ydoc.subscribe(value => {
     console.log(value)
-    if(ydoc.has('fileMap') && ydoc.getMap('fileMap').has('files'))
+    if(ydoc.getMap('fileMap') && ydoc.getMap('fileMap').has('files'))
     files = ydoc.getMap('fileMap')
     loadRoom(roomName)
   })
