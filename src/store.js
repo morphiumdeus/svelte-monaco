@@ -8,11 +8,17 @@ export const roomName = writable("")
 export const activeFile = writable("main")
 
 function createYdoc(){
-  const { subscribe, set, update } = writable(new Y.Doc());
+  const ydoc = new Y.Doc()
+  const { subscribe, set, update } = writable(ydoc)
 
 	return {
 		subscribe,
-    reset: () => {update(doc => new Y.Doc())},
+    reset: () => {
+      ydoc = new Y.Doc()
+      update(doc => ydoc)
+      console.log(ydoc, this);
+    },
+    getMap: (key) => ydoc.getMap(key)
 	}
 }
 export const ydoc = writable(createYdoc())
