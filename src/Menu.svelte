@@ -1,5 +1,8 @@
 <script>
-    import { roomName } from './store'    
+    import FileList from "./FileList.svelte"
+    import RoomInput from "./RoomInput.svelte"
+    
+
 </script>
 
 <style>
@@ -12,5 +15,6 @@
 </style>
 
 <div id="file-menu">
-    <input bind:value={$roomName} />
+    <RoomInput />
+    <FileList />
 </div>
