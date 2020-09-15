@@ -2,10 +2,15 @@
     import { roomName, ydoc, activeFile } from './store'
     let files = {}
     const unsubscribe = ydoc.subscribe(value => {
-        if(undefined !== value.getMap('fileMap')){
-            if(undefined !== value.getMap('fileMap').getMap('files')){
-                files = value.getMap('fileMap').getMap('files')
-                console.log(files);
+        console.log(value)
+        try {
+            files = value.getMap('fileMap').getMap('files')
+            console.log(files);
+        } catch (e) {
+            if (e instanceof TypeError) {
+                console.log(e);
+            } else {
+                console.log(e);
             }
         }
     })
