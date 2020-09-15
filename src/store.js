@@ -17,4 +17,4 @@ function createYdoc(){
 }
 export const ydoc = writable(createYdoc())
 
-export const websocketProvider = new WebsocketProvider(`${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, "connecting", ydoc)
+export const websocketProvider = writable(null)

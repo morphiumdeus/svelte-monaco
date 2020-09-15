@@ -23,7 +23,7 @@
           `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
         )
         this.websocketProvider.on('status', event => {
-          websocketProvider = this.websocketProvider
+          websocketProvider.set(this.websocketProvider)
           console.log(event.status) // logs "connected" or "disconnected"
           if(event.status == "connected"){
             let ymap = ydoc.getMap('fileMap')

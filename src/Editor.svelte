@@ -17,7 +17,7 @@
     const unsubscribe = roomName.subscribe(room => {
       console.log("room name changed: "+ room);
       loadRoom(room)
-    });
+    })
   })
 
   function loadRoom(roomName){
