@@ -1,7 +1,11 @@
 <script>
     import { roomName, ydoc, activeFile } from './store'
-    
-    $: files = ydoc.getMap('fileMap').get("files")
+    let files = {}
+    $: if(undefined !== ydoc.getMap('fileMap')){
+        if(undefined !== ydoc.getMap('fileMap').getMap('files')){
+            files = ydoc.getMap('fileMap').getMap('files')
+        }
+    }
 </script>
 
 <style>
