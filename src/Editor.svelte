@@ -5,8 +5,6 @@
   
   import {roomName, ydoc, websocketProvider} from './store'
   
-  import tryYdoc from './utils'
-  
   let monacoBinding, editor
   let data = {}
   let files = { has: () => false}

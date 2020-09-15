@@ -1,6 +1,5 @@
 <script>
     import { roomName, ydoc, activeFile } from './store'
-    import tryYdoc from './utils'
 
     let files = { has: () => false}
     const unsubscribe = ydoc.subscribe(value => {
