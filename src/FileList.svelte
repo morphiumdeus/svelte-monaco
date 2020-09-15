@@ -1,6 +1,6 @@
 <script>
     import { roomName, ydoc, activeFile } from './store'
-    let files = {}
+    let files = { get: () => false}
     const unsubscribe = ydoc.subscribe(value => {
         console.log(value)
         try {
