@@ -7,7 +7,7 @@
   
   let monacoBinding, editor
   let data = {}
-  let files = { has: () => false}
+  let files = { getMap: () => false}
   const unsubscribe = ydoc.subscribe(value => {
     console.log(value, $ydoc)
     if(value.getMap('fileMap') && value.getMap('fileMap').has('files'))
@@ -23,7 +23,7 @@
 
     const unsubscribe = roomName.subscribe(room => {
       console.log("room name changed: "+ room)
-      if(files.has('files')){
+      if(files.getMap('files')){
         loadRoom(room)
       }
     })
@@ -32,8 +32,7 @@
   function loadRoom(roomName){
     if(monacoBinding != undefined){
       monacoBinding.destroy()
-    }    
-    console.log(ydoc.get('fileMap'), ydoc.get('fileMap').get("files").get("main").get("content"));
+    }
     for(let [fileName, file] of ydoc.get('fileMap').get("files")){
       console.log(fileName, file.get("content").toString());
       data[fileName] = {}
