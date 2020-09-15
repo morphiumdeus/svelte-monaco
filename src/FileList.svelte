@@ -1,18 +1,12 @@
 <script>
     import { roomName, ydoc, activeFile } from './store'
-    let files = { get: () => false}
+    import tryYdoc from './utils'
+
+    let files = { has: () => false}
     const unsubscribe = ydoc.subscribe(value => {
         console.log(value)
-        try {
-            files = value.getMap('fileMap')
-            console.log(files);
-        } catch (e) {
-            if (e instanceof TypeError) {
-                console.log(e);
-            } else {
-                console.log(e);
-            }
-        }
+        if(ydoc.has('fileMap') && ydoc.getMap('fileMap').has('files'))
+        files = ydoc.getMap('fileMap')
     })
 </script>
 
@@ -23,7 +17,7 @@
 </style>
 
 <ul>
-    {#if files.get('isCreated')}
+    {#if files.has('files')}
         {#each files.getMap('files').keys() as file}
             <li class:selected={file == activeFile}>{file}</li>
         {/each}

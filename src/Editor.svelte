@@ -5,8 +5,16 @@
   
   import {roomName, ydoc, websocketProvider} from './store'
   
+  import tryYdoc from './utils'
+  
   let monacoBinding, editor
   let data = {}
+
+  const unsubscribe = ydoc.subscribe(value => {
+    console.log(value)
+    if(ydoc.has('fileMap') && ydoc.getMap('fileMap').has('files'))
+    files = ydoc.getMap('fileMap')
+  })
   
   onMount(() => {
     editor = monaco.editor.create(document.getElementById('monaco-container'), {
