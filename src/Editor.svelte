@@ -33,6 +33,7 @@
     if(monacoBinding != undefined){
       monacoBinding.destroy()
     }
+    console.log(files.getMap("files"));
     for(let [fileName, file] of files.getMap("files")){
       console.log(fileName, file.get("content").toString());
       data[fileName] = {}
