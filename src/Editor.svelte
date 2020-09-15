@@ -33,7 +33,7 @@
     if(monacoBinding != undefined){
       monacoBinding.destroy()
     }
-    for(let [fileName, file] of ydoc.get('fileMap').get("files")){
+    for(let [fileName, file] of files.get("files")){
       console.log(fileName, file.get("content").toString());
       data[fileName] = {}
       data[fileName].model = monaco.editor.createModel(file.get("content").toString(), 'yaml')
@@ -44,7 +44,7 @@
   function loadFileIntoEditor(fileName){
     editor.setModel(data[fileName].model)
     // Bind Yjs to the editor model
-    monacoBinding = new MonacoBinding(ydoc.get('fileMap').get("files").get(fileName).get("content"), data[fileName].model, new Set([editor]), websocketProvider.awareness)
+    monacoBinding = new MonacoBinding(files.get("files").get(fileName).get("content"), data[fileName].model, new Set([editor]), websocketProvider.awareness)
   }
 </script>
 
