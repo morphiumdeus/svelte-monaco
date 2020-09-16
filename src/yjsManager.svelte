@@ -4,7 +4,7 @@
     isReady: false,
     activeFile: 'main',
     websocketProvider: new WebsocketProvider(
-          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, this.ydoc
+          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, data.ydoc
         )
   }
 </script>
