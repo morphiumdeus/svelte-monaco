@@ -21,7 +21,7 @@
   })
 
   function changeRoom(roomName){
-    yjsIsReady = false
+    yjsIsReady.set(false)
     webSocket.changeRoom(roomName)
     indexeddb.changeRoom(roomName)
     data.ydoc.reset()
@@ -40,7 +40,7 @@
               console.debug('create a new project...')
               createEmptyProject(model)
             }            
-            yjsIsReady = true
+            yjsIsReady.set(true)
           }
         })
       },
