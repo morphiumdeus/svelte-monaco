@@ -4,7 +4,7 @@
     isReady: false,
     activeFile: 'main',
     websocketProvider: new WebsocketProvider(
-          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
+          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, this.ydoc
         )
   }
 </script>
@@ -25,21 +25,21 @@
     data.isReady = false
     webSocket.changeRoom(roomName)
     indexeddb.changeRoom(roomName)
-    ydoc.reset()
+    data.ydoc.reset()
   }
 
   const webSocket = {
       connect: (roomName) => {
         websocketProvider = new WebsocketProvider(
-          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
+          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, data.ydoc
         )
         websocketProvider.on('status', event => {
           console.debug(event.status) // logs "connected" or "disconnected"
           if(event.status == "connected"){
-            let ymap = ydoc.getMap('model')
-            if (undefined === ymap.get("files")) {
+            let model = data.ydoc.getMap('model')
+            if (undefined === model.get("files")) {
               console.debug('create a new project...')
-              createEmptyProject(ymap)
+              createEmptyProject(model)
             }            
           data.isReady = true
           }
@@ -57,7 +57,7 @@
     const indexeddb = {
       indexeddbProvider: null,
       connect: (roomName) => {
-        this.indexeddb = new IndexeddbPersistence(roomName, ydoc)
+        this.indexeddb = new IndexeddbPersistence(roomName, data.ydoc)
       },
       changeRoom: (roomName) => {
         this.connect(roomName)
