@@ -1,9 +1,9 @@
 <script>
-    import { roomName } from './store'
+    import { roomName, yjsIsReady } from './store'
     import { data } from './yjsManager.svelte'
 
     let model = { has: () => false}
-    const unsubscribe = data.isReady.subscribe(isReady => {
+    const unsubscribe = yjsIsReady.subscribe(isReady => {
         console.log(isReady)
         if(isReady){
             model = data.ydoc.getMap('model')

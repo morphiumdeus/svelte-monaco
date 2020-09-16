@@ -3,7 +3,7 @@
   import { onMount } from 'svelte'
   import { MonacoBinding } from 'y-monaco'
   
-  import {roomName} from './store'
+  import { roomName, yjsIsReady } from './store'
   import { data } from './yjsManager.svelte'
   
   let monacoBinding, editor
@@ -15,7 +15,7 @@
       language: "yaml"
     })
 
-    const unsubscribe = data.isReady.subscribe(isReady => {
+    const unsubscribe = yjsIsReady.subscribe(isReady => {
       console.log(isReady)
       if(isReady){
         model = data.ydoc.getMap('model')

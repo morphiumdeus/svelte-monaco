@@ -1,7 +1,6 @@
 <script context='module'>
   export const data = {
     ydoc: new Y.Doc(),
-    isReady: false,
     activeFile: 'main',
     websocketProvider: null
   }
@@ -12,17 +11,17 @@
   import { WebsocketProvider } from 'y-websocket'
   // import { WebrtcProvider } from 'y-webrtc'
 
-  import { roomName } from './store'
+  import { roomName, yjsIsReady } from './store'
 
   webSocket.connect(roomName)
-  
+
   const unsubscribe = roomName.subscribe(roomName => {
     console.debug("room name changed: "+ roomName)
     changeRoom(roomName)
   })
 
   function changeRoom(roomName){
-    data.isReady = false
+    yjsIsReady = false
     webSocket.changeRoom(roomName)
     indexeddb.changeRoom(roomName)
     data.ydoc.reset()
@@ -41,7 +40,7 @@
               console.debug('create a new project...')
               createEmptyProject(model)
             }            
-          data.isReady = true
+            yjsIsReady = true
           }
         })
       },
