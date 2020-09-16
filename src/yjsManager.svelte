@@ -3,9 +3,7 @@
     ydoc: new Y.Doc(),
     isReady: false,
     activeFile: 'main',
-    websocketProvider: new WebsocketProvider(
-          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, data.ydoc
-        )
+    websocketProvider: null
   }
 </script>
 
@@ -16,6 +14,8 @@
 
   import { roomName } from './store'
 
+  webSocket.connect(roomName)
+  
   const unsubscribe = roomName.subscribe(roomName => {
     console.debug("room name changed: "+ roomName)
     changeRoom(roomName)
