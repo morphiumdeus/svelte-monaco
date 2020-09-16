@@ -7,7 +7,7 @@
         console.log("The sentence \"%s\" corresponds to the id %d", $roomName, greg.parse($roomName.replaceAll("-", " ")))
     }
     const unsub = roomName.subscribe(room => {
-        console.log
+        console.log(room)
     })
 	</script>
 
