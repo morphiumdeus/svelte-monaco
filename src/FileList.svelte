@@ -1,11 +1,13 @@
 <script>
-    import { roomName, ydoc, activeFile } from './store'
+    import { roomName } from './store'
+    import { data } from './yjsManager.svelte'
 
-    let files = { has: () => false}
-    const unsubscribe = ydoc.subscribe(value => {
-        console.log(value, $ydoc)
-        if(value.getMap('fileMap') && value.getMap('fileMap').has('files'))
-        files = value.getMap('fileMap')
+    let model = { has: () => false}
+    const unsubscribe = data.isReady.subscribe(isReady => {
+        console.log(isReady)
+        if(isReady){
+            model = data.ydoc.getMap('model')
+        }        
     })
 </script>
 
@@ -16,9 +18,9 @@
 </style>
 
 <ul>
-    {#if files.has('files')}
-        {#each files.getMap('files').keys() as file}
-            <li class:selected={file == activeFile}>{file}</li>
+    {#if model.has('files')}
+        {#each model.getMap('files').keys() as file}
+            <li class:selected={file == data.activeFile}>{file}</li>
         {/each}
     {/if}
 </ul>

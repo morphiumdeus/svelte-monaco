@@ -1,35 +1,46 @@
+<script context='module'>
+  export const data = {
+    ydoc: new Y.Doc(),
+    isReady: false,
+    activeFile: 'main',
+    websocketProvider: new WebsocketProvider(
+          `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
+        )
+  }
+</script>
+
 <script>
   import * as Y from 'yjs'
   // import { WebrtcProvider } from 'y-webrtc'
 
-  import { roomName, ydoc, websocketProvider } from './store'
+  import { roomName } from './store'
 
   const unsubscribe = roomName.subscribe(roomName => {
-    console.log("room name changed: "+ roomName)
+    console.debug("room name changed: "+ roomName)
     changeRoom(roomName)
   })
 
   function changeRoom(roomName){
-    data.webSocket.changeRoom(roomName)
-    data.indexeddb.changeRoom(roomName)
+    data.isReady = false
+    webSocket.changeRoom(roomName)
+    indexeddb.changeRoom(roomName)
     ydoc.reset()
   }
 
-  const data = {
-    webSocket: {
-      websocketProvider: null,
+  const webSocket = {
       connect: (roomName) => {
-        this.websocketProvider = new WebsocketProvider(
+        websocketProvider = new WebsocketProvider(
           `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, ydoc
         )
-        this.websocketProvider.on('status', event => {
-          websocketProvider.set(this.websocketProvider)
-          console.log(event.status) // logs "connected" or "disconnected"
+        websocketProvider.on('status', event => {
+          console.debug(event.status) // logs "connected" or "disconnected"
           if(event.status == "connected"){
-            let ymap = ydoc.getMap('fileMap')
+            let ymap = ydoc.getMap('model')
             if (undefined === ymap.get("files")) {
+              console.debug('create a new project...')
               createEmptyProject(ymap)
-            }
+            }            
+          data.isReady = true
           }
         })
       },
@@ -39,23 +50,23 @@
         }
         this.connect(roomName)
       }
-    },
+    }
+
     // this allows you to instantly get the (cached) documents data
-    indexeddb: {
+    const indexeddb = {
       indexeddbProvider: null,
       connect: (roomName) => {
         this.indexeddb = new IndexeddbPersistence(roomName, ydoc)
-      }
-    },
+      },
       changeRoom: (roomName) => {
         this.connect(roomName)
       }
   }
 
   function createEmptyProject(ymap){
-    const fileMap = new Y.Map()
-    fileMap.set("main", createEmptyFile())
-    ymap.set('files', fileMap)
+    const model = new Y.Map()
+    model.set("main", createEmptyFile())
+    ymap.set('files', model)
   }
   function createEmptyFile(){
     const file = new Y.Map()

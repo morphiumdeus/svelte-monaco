@@ -3,18 +3,11 @@
   import { onMount } from 'svelte'
   import { MonacoBinding } from 'y-monaco'
   
-  import {roomName, ydoc, websocketProvider} from './store'
+  import {roomName} from './store'
+  import { data } from './yjsManager.svelte'
   
   let monacoBinding, editor
-  let data = {}
-  let files = { getMap: () => false}
-  const unsubscribe = ydoc.subscribe(value => {
-    console.log(value, $ydoc)
-    if(value.getMap('fileMap') && value.getMap('fileMap').has('files')){
-      files = value.getMap('fileMap')
-      loadRoom(roomName)
-    }    
-  })
+  let monacoModels = {}
   
   onMount(() => {
     editor = monaco.editor.create(document.getElementById('monaco-container'), {
@@ -22,11 +15,12 @@
       language: "yaml"
     })
 
-    const unsubscribe = roomName.subscribe(room => {
-      console.log("room name changed: "+ room)
-      if(files.getMap('files')){
-        loadRoom(room)
-      }
+    const unsubscribe = data.isReady.subscribe(isReady => {
+      console.log(isReady)
+      if(isReady){
+        model = data.ydoc.getMap('model')
+        loadRoom(roomName)
+      }        
     })
   })
 
@@ -34,19 +28,18 @@
     if(monacoBinding != undefined){
       monacoBinding.destroy()
     }
-    console.log(files.getMap("files"));
-    for(let [fileName, file] of files.getMap("files")){
-      console.log(fileName, file.get("content").toString());
-      data[fileName] = {}
-      data[fileName].model = monaco.editor.createModel(file.get("content").toString(), 'yaml')
+    console.log(model.getMap('files'));
+    for(let [fileName, file] of files.getMap('files')){
+      console.log(fileName, file.get("content").toString())
+      monacoModels[fileName] = monaco.editor.createModel(file.get("content").toString(), 'yaml')
     }
     loadFileIntoEditor("main")
       
   }
   function loadFileIntoEditor(fileName){
-    editor.setModel(data[fileName].model)
+    editor.setModel(monacoModels[fileName])
     // Bind Yjs to the editor model
-    monacoBinding = new MonacoBinding(files.getMap("files").get(fileName).get("content"), data[fileName].model, new Set([editor]), websocketProvider.awareness)
+    monacoBinding = new MonacoBinding(model.getMap('files').get(fileName).get("content"), monacoModels[fileName], new Set([editor]), data.websocketProvider.awareness)
   }
 </script>
 
