@@ -11,6 +11,7 @@
 
 <script>
   import * as Y from 'yjs'
+  import { WebsocketProvider } from 'y-websocket'
   // import { WebrtcProvider } from 'y-webrtc'
 
   import { roomName } from './store'
