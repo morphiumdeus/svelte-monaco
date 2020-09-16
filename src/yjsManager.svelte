@@ -15,9 +15,9 @@
 
   webSocket.connect(roomName)
 
-  const unsubscribe = roomName.subscribe(roomName => {
-    console.debug("room name changed: "+ roomName)
-    changeRoom(roomName)
+  const unsubscribe = roomName.subscribe(room => {
+    console.debug("room name changed: "+ room)
+    changeRoom(room)
   })
 
   function changeRoom(roomName){
@@ -29,10 +29,10 @@
 
   const webSocket = {
       connect: (roomName) => {
-        websocketProvider = new WebsocketProvider(
+        data.websocketProvider = new WebsocketProvider(
           `${location.protocol === 'http:' ? 'ws:' : 'wss:'}//demos.yjs.dev`, roomName, data.ydoc
         )
-        websocketProvider.on('status', event => {
+        data.websocketProvider.on('status', event => {
           console.debug(event.status) // logs "connected" or "disconnected"
           if(event.status == "connected"){
             let model = data.ydoc.getMap('model')
